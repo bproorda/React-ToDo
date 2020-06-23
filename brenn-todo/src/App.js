@@ -22,10 +22,6 @@ function App() {
   return (
     <>
       <Header userName={user} />
-      <div id="App">
-        <p>
-          Brennan's Todo List: Under Construction!
-        </p>
         <Switch>
           <Route exact path='/'>
         <Login setUserName={setUserName} />
@@ -37,7 +33,6 @@ function App() {
           404
         </Route>
         </Switch>
-      </div>
       <Footer />
     </>
   );
