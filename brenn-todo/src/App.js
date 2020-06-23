@@ -1,17 +1,17 @@
 import React from 'react';
-import logo from './squirrel.jpg';
+import Header from './Components/header'
 import './App.css';
 
 function App() {
   return (
+    <>
+    <Header/>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Brennan's Todo List: Under Construction!
         </p>
-        </header>
     </div>
+    </>
   );
 }
 
