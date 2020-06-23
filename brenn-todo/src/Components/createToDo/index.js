@@ -12,7 +12,7 @@ export default function Create(props) {
             difficulty: e.target.difficulty.value,
         }
         let newHistory = [newHistoryItem, ...props.history];
-        //console.log(newHistory);
+        console.log(e.target);
         props.addToHistory(newHistory);
     }
 
@@ -26,7 +26,7 @@ export default function Create(props) {
                         <label name="title">To Do: </label>
                         <input name="title" type="text"></input>
 
-                        <lablel name="dueDate">Due Date: </lablel>
+                        <label name="dueDate">Due Date: </label>
                         <input name="dueDate" type="date"></input>
 
                         <label name="assignee">Assigned To: </label>
@@ -35,6 +35,7 @@ export default function Create(props) {
                         <label name="difficulty">Difficulty: </label>
                         <input  name="difficulty" type="range" min="0" max="5" step="1"></input>
                         <button type="submit">Create</button>
+                        <button type="reset">Clear Form</button>
                     </fieldset>
                 </form>
             </div>
