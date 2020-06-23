@@ -14,7 +14,7 @@ export default function Header(props) {
             <header>
                 <img src={logo} id="logo" alt="logo" />
                 <h2>
-                    <b>{ props.userName ? props.userName : altName}</b> 
+                    <b>{ props.userName ? props.userName + "'S" : altName}</b> 
                     <p> To Do List</p>
                    </h2>
             </header>
