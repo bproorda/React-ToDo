@@ -12,7 +12,7 @@ export default function Header(props) {
     return (
         <>
         <header>
-         <img src={logo} className="logo" alt="logo" />
+         <img src={logo} id="logo" alt="logo" />
          <h2>Brenn's To Do List</h2>
          </header>
         </>
