@@ -29,9 +29,7 @@ function App() {
         </Route>
         <Route path='/todos'>
         <Todos />
-        </Route>
-        <Route path='/create'>
-        <Create/>
+        <Create />
         </Route>
         <Route>
           404

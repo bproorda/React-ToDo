@@ -4,8 +4,9 @@ import './createToDo.scss';
 export default function Create(props) {
 
     function SubmitHandler(e) {
-
+        e.preventDefault();
     }
+    
     return (
         <>
             <div id="create">
@@ -24,6 +25,7 @@ export default function Create(props) {
 
                         <label name="difficulty">Difficulty: </label>
                         <input name="difficutly" type="range" min="0" max="11" step="1"></input>
+                        <button type="submit">Create</button>
                     </fieldset>
                 </form>
             </div>
