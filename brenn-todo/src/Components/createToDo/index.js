@@ -5,8 +5,9 @@ export default function Create(props) {
 
     function SubmitHandler(e) {
         e.preventDefault();
+        console.log(e.target.title.value);
     }
-    
+
     return (
         <>
             <div id="create">

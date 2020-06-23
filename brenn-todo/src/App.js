@@ -9,12 +9,20 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
+  const [history, setHistory] = JSON.parse(useState(window.localStorage.getItem("history")) || []);
 
-  function setUserName(data) {
-    console.log(data)
-    setUser(data);
-    console.log(user);
+  function setUserName(newUserName) {
+    console.log(newUserName)
+    setUser(newUserName);
   }
+
+  function addToHistory(newHistory){
+    setHistory(newHistory);
+  }
+
+  useEffect(() => {
+    JSON.stringify(window.localStorage.setItem("history", history))
+  }, [history]);
 
   useEffect(() => {
     document.title = user + "'s To Do list";
@@ -28,8 +36,8 @@ function App() {
         <Login setUserName={setUserName} />
         </Route>
         <Route path='/todos'>
-        <Todos />
-        <Create />
+        <Todos history={history} />
+        <Create addToHistory={addToHistory} history={history}/>
         </Route>
         <Route>
           404
