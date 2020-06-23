@@ -1,0 +1,19 @@
+header {
+    background-color: blue;
+    position: fixed;
+    top: 0;
+    width: 99%;
+    height: 15%;
+    border-bottom: 2px solid black;
+    #logo {
+        width: 8%;
+        margin: 10px;
+        border-radius: 20%;
+    }
+    h2{
+        display: inline-block;
+        font-family: 'Pangolin', cursive;
+        //figure out how to vertically center text later
+        margin: auto 0 auto 0;
+    }
+}

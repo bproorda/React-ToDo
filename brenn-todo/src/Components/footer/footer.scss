@@ -1,0 +1,15 @@
+footer{
+    background-color: blue;
+    position: fixed;
+    bottom: 0;
+    width: 99%;
+    height: 10%;
+    border-top: 2px solid black;
+    font-weight: bold;
+    text-align: center;
+    
+    #copyright {
+        font-weight: bolder;
+        color: rgb(77, 13, 13);
+    }
+}

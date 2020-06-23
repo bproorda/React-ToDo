@@ -1,0 +1,30 @@
+#todoList{
+    display: inline-block;
+    margin-top: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 45%;
+    margin-bottom: 20%;
+    .complete {
+        background-color: darkblue;
+    }
+    .incomplete {
+        background-color: yellow;
+    }
+    li {
+        padding: 15px;
+        margin-bottom: 5%;
+        list-style-type: none;
+    }
+    #cc {
+        color: darkblue;
+    }
+    #ic {
+        color: yellow;
+    }
+    #counters {
+        background-color: darkgray;
+        padding: 10px;
+        border: 1px solid black;
+    }
+}
