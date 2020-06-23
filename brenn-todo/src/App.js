@@ -22,24 +22,12 @@ function App() {
      setHistory(newHistory);
      window.localStorage.setItem("history", JSON.stringify(newHistory));
   }
-  function getCurrentHistory() {
-    let history = window.localStorage.getItem("history");
-    let currentHistory = history ? JSON.parse(history) : [];
-    console.log("Upon load, history is " + currentHistory);
-  }
 
-  // function saveHistoryToLocal(){
-  //   JSON.stringify(window.localStorage.setItem("history", history));
-  // }
-
-  // useEffect(() => {
-  //   const saveHistoryToLocal = () =>{
-  //     JSON.stringify(window.localStorage.setItem("history", history));
-  //   }
-  // }, [history]);
 
   useEffect(() => {
-    //getCurrentHistory();
+    let currentHistory = JSON.parse(window.localStorage.getItem("history"));
+    console.log("Intital history is: " + currentHistory);
+    setHistory(currentHistory);
   }, []);
 
   useEffect(() => {
