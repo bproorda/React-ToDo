@@ -17,7 +17,7 @@ export default function Login(props){
  
     return(
         <>
-        <form onSubmit={submitHandler}>
+        <form id="loginForm" onSubmit={submitHandler}>
             <label>Enter your Name:</label>
             <input onChange={(e) => setName(e.target.value)}></input>
             <button type='submit'>Submit</button>
