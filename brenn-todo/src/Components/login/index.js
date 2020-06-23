@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
+import { useHistory  } from 'react-router-dom'
 import './login.scss'
 
 export default function Login(props){
-
+    
     const [name, setName] = useState("");
+
+    let history = useHistory();
 
     function submitHandler(e){
         e.preventDefault();
         props.setUserName(name)
         e.target.reset();
+        history.push('/todos');
     }
  
     return(
