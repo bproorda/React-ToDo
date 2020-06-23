@@ -4,7 +4,9 @@ import './createToDo.scss';
 export default function Create(props){
     return(
         <>
-        <p>Where is my form</p>
+        <div id="create">
+        <p>Where is my form?</p>
+        </div>
         </>
     )
 }
