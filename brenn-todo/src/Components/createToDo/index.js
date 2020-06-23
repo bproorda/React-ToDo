@@ -5,7 +5,15 @@ export default function Create(props) {
 
     function SubmitHandler(e) {
         e.preventDefault();
-        console.log(e.target.title.value);
+        let newHistoryItem = {
+            title: e.target.title.value,
+            dueDate: e.target.dueDate.value,
+            assignee: e.target.assignee.value,
+            difficulty: e.target.difficulty.value,
+        }
+        let newHistory = [newHistoryItem, ...props.history];
+        //console.log(newHistory);
+        props.addToHistory(newHistory);
     }
 
     return (
@@ -18,14 +26,14 @@ export default function Create(props) {
                         <label name="title">To Do: </label>
                         <input name="title" type="text"></input>
 
-                        <lablel name ="dueDate">Due Date: </lablel>
+                        <lablel name="dueDate">Due Date: </lablel>
                         <input name="dueDate" type="date"></input>
 
                         <label name="assignee">Assigned To: </label>
                         <input name="assignee" type="text"></input>
 
                         <label name="difficulty">Difficulty: </label>
-                        <input name="difficutly" type="range" min="0" max="11" step="1"></input>
+                        <input  name="difficulty" type="range" min="0" max="5" step="1"></input>
                         <button type="submit">Create</button>
                     </fieldset>
                 </form>
