@@ -3,6 +3,19 @@ import './todos.scss'
 
 export default function Todos(props) {
 
+    function toggleComplete(index){
+        let updatedTodos = props.history.map((todo, id) => {
+            if (id !== index){
+                return todo;
+            } else {
+                todo.completed = !todo.completed;
+                return todo;
+            }
+            
+        })
+        props.addToHistory(updatedTodos);
+    }
+
     return (
         <>
             <div id="todoList">
@@ -14,7 +27,7 @@ export default function Todos(props) {
                             <p>Due Date: {todo.dueDate}</p>
                             <p>Difficulty: {todo.difficulty}</p>
                             <div className="buttons">
-                                <button>Mark Complete</button>
+                                <button onClick={() => toggleComplete(index)}>Mark Complete</button>
                                 <button>Edit</button>
                                 <button>Delete</button>
                             </div>

@@ -42,7 +42,7 @@ function App() {
           <Login setUserName={setUserName} />
         </Route>
         <Route path='/todos'>
-          <Todos history={history} />
+          <Todos history={history} addToHistory={addToHistory} />
           <Create addToHistory={addToHistory} history={history} />
         </Route>
         <Route>
