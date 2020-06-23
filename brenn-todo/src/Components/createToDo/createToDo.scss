@@ -1,6 +1,9 @@
 #create {
     display: inline-block;
-    margin-top: 15%;
+    position: absolute;
+    background-color: darkgrey;
+    border: 1px solid black;
+    top: 45%;
     width: 40%;
     input {
         display: block;
