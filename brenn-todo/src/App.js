@@ -4,6 +4,7 @@ import Header from './Components/header';
 import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
+import Create from './Components/createToDo';
 import './App.css';
 
 function App() {
@@ -26,8 +27,11 @@ function App() {
           <Route exact path='/'>
         <Login setUserName={setUserName} />
         </Route>
-        <Route exact path='/todos'>
+        <Route path='/todos'>
         <Todos />
+        </Route>
+        <Route path='/create'>
+        <Create/>
         </Route>
         <Route>
           404
