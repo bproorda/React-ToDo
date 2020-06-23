@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     let currentHistory = JSON.parse(window.localStorage.getItem("history"));
     console.log("Intital history is: " + currentHistory);
-    setHistory(currentHistory);
+    setHistory(currentHistory || []);
   }, []);
 
   useEffect(() => {
