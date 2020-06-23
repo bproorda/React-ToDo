@@ -5,7 +5,13 @@ import Login from './Components/login'
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
+
+function setUserName(data) {
+  console.log(data)
+  setUser(data);
+  console.log(user);
+}
   return (
     <>
     <Header  userName = {user}/>
@@ -13,7 +19,7 @@ function App() {
         <p>
           Brennan's Todo List: Under Construction!
         </p>
-        <Login/>
+        <Login  setUserName = {setUserName}/>
     </div>
     <Footer/>
     </>
