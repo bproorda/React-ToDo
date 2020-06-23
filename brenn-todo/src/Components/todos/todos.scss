@@ -3,4 +3,10 @@
     margin-top: 20%;
     margin-left: 10%;
     width: 50%;
+    .complete {
+        background-color: darkblue;
+    }
+    .incomplete {
+        background-color: yellow;
+    }
 }
