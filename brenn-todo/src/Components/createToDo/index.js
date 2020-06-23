@@ -10,6 +10,7 @@ export default function Create(props) {
             dueDate: e.target.dueDate.value,
             assignee: e.target.assignee.value,
             difficulty: e.target.difficulty.value,
+            completed: false,
         }
         let newHistory = [newHistoryItem, ...props.history];
         console.log(e.target);
