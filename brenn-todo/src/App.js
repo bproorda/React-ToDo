@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Switch, Route} from 'react-router-dom';
 import Header from './Components/header'
 import Footer from './Components/footer'
 import Login from './Components/login'
@@ -24,7 +25,14 @@ function App() {
         <p>
           Brennan's Todo List: Under Construction!
         </p>
+        <Switch>
+          <Route exact path='/'>
         <Login setUserName={setUserName} />
+        </Route>
+        <Route>
+          404
+        </Route>
+        </Switch>
       </div>
       <Footer />
     </>
