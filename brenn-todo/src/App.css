@@ -4,4 +4,13 @@
   bottom: 0;
   right: 0;
   left: 0;
+
+ 
+}
+#loadingPic {
+  margin: 0 auto;
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 30%;
 }

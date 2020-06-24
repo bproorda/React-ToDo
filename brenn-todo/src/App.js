@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import useFetch from './Components/hooks/fetch';
 import Header from './Components/header';
 import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
+import LoadingPic from './sq2.gif'
 import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
-  //const [history, setHistory] = useState(JSON.parse(window.localStorage.getItem("history")) || []);
+  const [isLoading, data, refresh] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
   function setUserName(newUserName) {
@@ -17,23 +19,31 @@ function App() {
     setUser(newUserName);
   }
 
-  function addToHistory(newHistory) {
-    console.log(newHistory);
-     setHistory(newHistory);
-     window.localStorage.setItem("history", JSON.stringify(newHistory));
+  function updateStoredTodos(){
+        refresh();
+        setHistory(data);
+        window.localStorage.setItem("history", JSON.stringify(data));
   }
 
 
   useEffect(() => {
-    let currentHistory = JSON.parse(window.localStorage.getItem("history"));
-    console.log("Intital history is: " + currentHistory);
-    setHistory(currentHistory || []);
-  }, []);
+    console.log("Intital history is: " + data);
+    setHistory(data);
+    window.localStorage.setItem("history", JSON.stringify(data));
+  }, [data]);
 
   useEffect(() => {
     document.title = user + "'s To Do list";
   }, [user]);
 
+
+  if(isLoading) {
+    return (
+        <>
+        <img src={LoadingPic} id="loadingPic" alt="loadingPic" />
+        </>
+    )
+} else {
   return (
     <>
       <Header userName={user} />
@@ -42,8 +52,8 @@ function App() {
           <Login setUserName={setUserName} />
         </Route>
         <Route path='/todos'>
-          <Todos history={history} addToHistory={addToHistory} />
-          <Create addToHistory={addToHistory} history={history} />
+          <Todos listOfTodos={history} updateStoredTodos={updateStoredTodos}  />
+          <Create updateStoredTodos={updateStoredTodos} />
         </Route>
         <Route>
           404
@@ -52,6 +62,7 @@ function App() {
       <Footer />
     </>
   );
+}
 }
 
 export default App;

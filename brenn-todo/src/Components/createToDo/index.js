@@ -2,21 +2,30 @@ import React, {useState} from 'react';
 import './createToDo.scss';
 
 export default function Create(props) {
-
+    const {updateStoredTodos} = props;
+    let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos'
     const [range, setRange] = useState(0);
 
-    function SubmitHandler(e) {
+   async function SubmitHandler(e) {
         e.preventDefault();
-        let newHistoryItem = {
+        let newTodo = {
             title: e.target.title.value,
-            dueDate: e.target.dueDate.value,
-            assignee: e.target.assignee.value,
-            difficulty: e.target.difficulty.value,
+            //dueDate: e.target.dueDate.value,
+            difficulty: Number(e.target.difficulty.value),
+            assignedTo: e.target.assignee.value,
             completed: false,
         }
-        let newHistory = [newHistoryItem, ...props.history];
-        console.log(e.target);
-        props.addToHistory(newHistory);
+        console.log(newTodo);
+
+        let response = await fetch(url, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newTodo),
+        }); 
+        console.log(response);
+        updateStoredTodos();
     }
 
     function rangeHandler(e) {
@@ -34,8 +43,8 @@ export default function Create(props) {
                         <label name="title">To Do: </label>
                         <input name="title" type="text"></input>
 
-                        <label name="dueDate">Due Date: </label>
-                        <input name="dueDate" type="date"></input>
+                        {/* <label name="dueDate">Due Date: </label>
+                        <input name="dueDate" type="date"></input> */}
 
                         <label name="assignee">Assigned To: </label>
                         <input name="assignee" type="text"></input>

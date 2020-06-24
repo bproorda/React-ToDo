@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import './todos.scss'
+import './todos.scss';
 
 export default function Todos(props) {
     const [completedCount, setCompletedCount] = useState(0);
     const [incompletedCount, setIncompletedCount] = useState(0);
+    const {listOfTodos, updateStoredTodos } = props;
 
 
     function toggleComplete(index) {
-        let updatedTodos = props.history.map((todo, id) => {
+        let updatedTodos = listOfTodos.map((todo, id) => {
             if (id !== index) {
                 return todo;
             } else {
@@ -16,14 +17,21 @@ export default function Todos(props) {
             }
 
         })
-        props.addToHistory(updatedTodos);
+        //need to make put method...someday
+        //props.addToHistory(updatedTodos);
+    }
+
+    async function deleteHandler(index) {
+        let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos/' + index;
+        let response = await fetch(url, {method: "delete"});
+        console.log(response);
+        updateStoredTodos();
     }
 
     useEffect(() => {
         let Ccount = 0;
         let Icount = 0;
-        let array = props.history;
-        array.forEach(todo => {
+        listOfTodos.forEach(todo => {
             if (todo.completed) {
                 Ccount++;
             } else {
@@ -32,7 +40,9 @@ export default function Todos(props) {
         });
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
-    }, [props.history])
+    }, [listOfTodos])
+
+
 
     return (
         <>
@@ -42,16 +52,16 @@ export default function Todos(props) {
                     <h2>Completed To Dos: <span id="cc">{completedCount}</span></h2>
                 </div>
                 <ul>
-                    {props.history.map((todo, index) => (
-                        <li key={index} className={todo.completed ? "complete" : "incomplete"}>
+                    {listOfTodos.map((todo, index) => (
+                        <li key={todo.id} className={todo.completed ? "complete" : "incomplete"}>
                             <h3>To Do: {todo.title}</h3>
-                            <p>Assigned to: {todo.assignee}</p>
-                            <p>Due Date: {todo.dueDate}</p>
+                            <p>Assigned to: {todo.assignedTo}</p>
+                            {/* <p>Due Date: {todo.dueDate}</p> */}
                             <p>Difficulty: {todo.difficulty}</p>
                             <div className="buttons">
                                 <button onClick={() => toggleComplete(index)}>Mark Complete</button>
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <button onClick={() => deleteHandler(todo.id)}>Delete</button>
                             </div>
                         </li>
 
