@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.04137ae5.chunk.css",
+    "main.js": "/static/js/main.e28863e3.chunk.js",
+    "main.js.map": "/static/js/main.e28863e3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a6747b2e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a6747b2e.js.map",
+    "static/js/2.4023e99f.chunk.js": "/static/js/2.4023e99f.chunk.js",
+    "static/js/2.4023e99f.chunk.js.map": "/static/js/2.4023e99f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.d97c8413a91d8cd83af55ce229afddf9.js": "/precache-manifest.d97c8413a91d8cd83af55ce229afddf9.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.04137ae5.chunk.css.map": "/static/css/main.04137ae5.chunk.css.map",
+    "static/js/2.4023e99f.chunk.js.LICENSE.txt": "/static/js/2.4023e99f.chunk.js.LICENSE.txt",
+    "static/media/sq2.gif": "/static/media/sq2.b3f8f46f.gif",
+    "static/media/squirrel.jpg": "/static/media/squirrel.f11eac82.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a6747b2e.js",
+    "static/js/2.4023e99f.chunk.js",
+    "static/css/main.04137ae5.chunk.css",
+    "static/js/main.e28863e3.chunk.js"
+  ]
+}
