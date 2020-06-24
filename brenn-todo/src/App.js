@@ -6,6 +6,7 @@ import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
+import LoadingPic from './sq2.gif'
 import './App.css';
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
     document.title = user + "'s To Do list";
   }, [user]);
 
+
+  if(isLoading) {
+    return (
+        <>
+        <img src={LoadingPic} id="loadingPic" alt="loadingPic" />
+        </>
+    )
+} else {
   return (
     <>
       <Header userName={user} />
@@ -43,7 +52,7 @@ function App() {
           <Login setUserName={setUserName} />
         </Route>
         <Route path='/todos'>
-          <Todos history={history} addToHistory={addToHistory} />
+          <Todos listOfTodos={history} addToHistory={addToHistory} />
           <Create addToHistory={addToHistory} history={history} />
         </Route>
         <Route>
@@ -53,6 +62,7 @@ function App() {
       <Footer />
     </>
   );
+}
 }
 
 export default App;

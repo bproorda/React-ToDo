@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import useFetch from '../hooks/fetch';
-import LoadingPic from './sq2.gif'
+
 import './todos.scss';
 
 export default function Todos(props) {
     const [completedCount, setCompletedCount] = useState(0);
     const [incompletedCount, setIncompletedCount] = useState(0);
-    const [isLoading, data] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
+    const {listOfTodos} = props;
 
 
     // function toggleComplete(index) {
@@ -38,13 +38,7 @@ export default function Todos(props) {
     // }, [data])
 
 
- if(isLoading) {
-     return (
-         <>
-         <img src={LoadingPic} id="loadingPic" alt="loadingPic" />
-         </>
-     )
- }
+
     return (
         <>
             <div id="todoList">
@@ -53,7 +47,7 @@ export default function Todos(props) {
                     <h2>Completed To Dos: <span id="cc">{completedCount}</span></h2>
                 </div>
                 <ul>
-                    {data.map((todo, index) => (
+                    {listOfTodos.map((todo, index) => (
                         <li key={index} className={todo.completed ? "complete" : "incomplete"}>
                             <h3>To Do: {todo.title}</h3>
                             <p>Assigned to: {todo.assignedTo}</p>
