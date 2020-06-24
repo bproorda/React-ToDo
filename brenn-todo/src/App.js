@@ -52,7 +52,7 @@ function App() {
           <Login setUserName={setUserName} />
         </Route>
         <Route path='/todos'>
-          <Todos listOfTodos={history}  />
+          <Todos listOfTodos={history} updateStoredTodos={updateStoredTodos}  />
           <Create updateStoredTodos={updateStoredTodos} />
         </Route>
         <Route>

@@ -4,7 +4,7 @@ import './todos.scss';
 export default function Todos(props) {
     const [completedCount, setCompletedCount] = useState(0);
     const [incompletedCount, setIncompletedCount] = useState(0);
-    const {listOfTodos} = props;
+    const {listOfTodos, updateStoredTodos } = props;
 
 
     function toggleComplete(index) {
@@ -17,7 +17,15 @@ export default function Todos(props) {
             }
 
         })
-        props.addToHistory(updatedTodos);
+        //need to make put method...someday
+        //props.addToHistory(updatedTodos);
+    }
+
+    async function deleteHandler(index) {
+        let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos/' + index;
+        let response = await fetch(url);
+        console.log(response);
+        updateStoredTodos();
     }
 
     useEffect(() => {
@@ -45,7 +53,7 @@ export default function Todos(props) {
                 </div>
                 <ul>
                     {listOfTodos.map((todo, index) => (
-                        <li key={index} className={todo.completed ? "complete" : "incomplete"}>
+                        <li key={todo.id} className={todo.completed ? "complete" : "incomplete"}>
                             <h3>To Do: {todo.title}</h3>
                             <p>Assigned to: {todo.assignedTo}</p>
                             {/* <p>Due Date: {todo.dueDate}</p> */}
@@ -53,7 +61,7 @@ export default function Todos(props) {
                             <div className="buttons">
                                 <button onClick={() => toggleComplete(index)}>Mark Complete</button>
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <button onClick={() => deleteHandler(todo.id)}>Delete</button>
                             </div>
                         </li>
 
