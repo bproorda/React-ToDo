@@ -23,7 +23,7 @@ export default function Todos(props) {
 
     async function deleteHandler(index) {
         let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos/' + index;
-        let response = await fetch(url);
+        let response = await fetch(url, {method: "delete"});
         console.log(response);
         updateStoredTodos();
     }
