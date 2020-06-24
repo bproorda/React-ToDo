@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import useFetch from '../hooks/fetch';
-
 import './todos.scss';
 
 export default function Todos(props) {
@@ -9,33 +7,32 @@ export default function Todos(props) {
     const {listOfTodos} = props;
 
 
-    // function toggleComplete(index) {
-    //     let updatedTodos = props.history.map((todo, id) => {
-    //         if (id !== index) {
-    //             return todo;
-    //         } else {
-    //             todo.completed = !todo.completed;
-    //             return todo;
-    //         }
+    function toggleComplete(index) {
+        let updatedTodos = listOfTodos.map((todo, id) => {
+            if (id !== index) {
+                return todo;
+            } else {
+                todo.completed = !todo.completed;
+                return todo;
+            }
 
-    //     })
-    //     props.addToHistory(updatedTodos);
-    // }
+        })
+        props.addToHistory(updatedTodos);
+    }
 
-    // useEffect(() => {
-    //     let Ccount = 0;
-    //     let Icount = 0;
-        //let array = data;
-        // data.forEach(todo => {
-        //     if (todo.completed) {
-        //         Ccount++;
-        //     } else {
-        //         Icount++;
-        //     }
-    //     });
-    //     setCompletedCount(Ccount);
-    //     setIncompletedCount(Icount);
-    // }, [data])
+    useEffect(() => {
+        let Ccount = 0;
+        let Icount = 0;
+        listOfTodos.forEach(todo => {
+            if (todo.completed) {
+                Ccount++;
+            } else {
+                Icount++;
+            }
+        });
+        setCompletedCount(Ccount);
+        setIncompletedCount(Icount);
+    }, [listOfTodos])
 
 
 
@@ -54,7 +51,7 @@ export default function Todos(props) {
                             {/* <p>Due Date: {todo.dueDate}</p> */}
                             <p>Difficulty: {todo.difficulty}</p>
                             <div className="buttons">
-                                {/* <button onClick={() => toggleComplete(index)}>Mark Complete</button> */}
+                                <button onClick={() => toggleComplete(index)}>Mark Complete</button>
                                 <button>Edit</button>
                                 <button>Delete</button>
                             </div>
