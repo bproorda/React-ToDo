@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import useFetch from '../hooks/fetch'
 import './createToDo.scss';
 
 export default function Create(props) {
-    //const {listOfTodos} = props;
+    const {updateStoredTodos} = props;
     let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos'
-    const {refresh} = useFetch(url);
     const [range, setRange] = useState(0);
 
    async function SubmitHandler(e) {
@@ -27,9 +25,7 @@ export default function Create(props) {
               body: JSON.stringify(newTodo),
         }); 
         console.log(response);
-        refresh();
-        
-
+        updateStoredTodos();
     }
 
     function rangeHandler(e) {

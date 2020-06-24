@@ -19,6 +19,7 @@ export default function useFetch(url){
     }, [url]);
 
     const refresh = () => {
+      console.log("refreshing");
       reload(url);
     };
 
