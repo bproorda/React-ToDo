@@ -42,8 +42,6 @@ export default function Todos(props) {
         setIncompletedCount(Icount);
     }, [listOfTodos])
 
-
-
     return (
         <>
             <div id="todoList">
