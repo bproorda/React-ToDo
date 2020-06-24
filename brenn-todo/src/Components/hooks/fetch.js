@@ -18,13 +18,16 @@ export default function useFetch(url){
       
     }, [url]);
 
-    async function refresh() {
-      setLoading(true);
+    const refresh = () => {
+      reload(url);
+    };
+
+    async function reload() {
       let response = await fetch(url);
       let json = await response.json();
       setData(json);
-      setLoading(false);
-    }
+    };
+
     return [
         isLoading,
         data,

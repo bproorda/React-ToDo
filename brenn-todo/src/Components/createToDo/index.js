@@ -5,7 +5,7 @@ import './createToDo.scss';
 export default function Create(props) {
     //const {listOfTodos} = props;
     let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos'
-    const [refresh] = useFetch(url);
+    const {refresh} = useFetch(url);
     const [range, setRange] = useState(0);
 
    async function SubmitHandler(e) {
@@ -17,17 +17,18 @@ export default function Create(props) {
             assignedTo: e.target.assignee.value,
             completed: false,
         }
-        //let newTodos = [newTodo, ...listOfTodos];
         console.log(newTodo);
 
-         await fetch(url, {
+        let response = await fetch(url, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify(newTodo),
         }); 
-        //refresh();
+        console.log(response);
+        refresh();
+        
 
     }
 
