@@ -15,7 +15,7 @@ export default function Create(props) {
             completed: false,
         }
         let newHistory = [newHistoryItem, ...props.history];
-        console.log(e.target);
+        //console.log(newHistoryItem);
         props.addToHistory(newHistory);
     }
 

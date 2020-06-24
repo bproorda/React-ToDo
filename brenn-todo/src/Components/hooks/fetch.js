@@ -11,9 +11,11 @@ export default function useFetch(url){
         let json = await response.json();
         setData(json);
         setLoading(false);
+        //console.log(json);
       }
   
       doFetch();
+      
     }, [url]);
     return [
         isLoading,
