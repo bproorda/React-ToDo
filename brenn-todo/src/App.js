@@ -11,19 +11,12 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
-  const [isLoading, data, refresh] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
+  const [isLoading, data] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
   function setUserName(newUserName) {
     console.log(newUserName)
     setUser(newUserName);
-  }
-
-  function addToHistory(newHistory) {
-    console.log(newHistory);
-     setHistory(newHistory);
-     window.localStorage.setItem("history", JSON.stringify(newHistory));
-     refresh();
   }
 
 
@@ -53,8 +46,8 @@ function App() {
           <Login setUserName={setUserName} />
         </Route>
         <Route path='/todos'>
-          <Todos listOfTodos={history} addToHistory={addToHistory} />
-          <Create addToHistory={addToHistory} history={history} />
+          <Todos listOfTodos={history}  />
+          <Create  listOfTodos={history} />
         </Route>
         <Route>
           404

@@ -1,22 +1,34 @@
 import React, {useState} from 'react';
+import useFetch from '../hooks/fetch'
 import './createToDo.scss';
 
 export default function Create(props) {
-
+    //const {listOfTodos} = props;
+    let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos'
+    const [refresh] = useFetch(url);
     const [range, setRange] = useState(0);
 
-    function SubmitHandler(e) {
+   async function SubmitHandler(e) {
         e.preventDefault();
-        let newHistoryItem = {
+        let newTodo = {
             title: e.target.title.value,
             //dueDate: e.target.dueDate.value,
-            difficulty: e.target.difficulty.value,
+            difficulty: Number(e.target.difficulty.value),
             assignedTo: e.target.assignee.value,
             completed: false,
         }
-        let newHistory = [newHistoryItem, ...props.history];
-        console.log(newHistoryItem);
-        props.addToHistory(newHistory);
+        //let newTodos = [newTodo, ...listOfTodos];
+        console.log(newTodo);
+
+         await fetch(url, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newTodo),
+        }); 
+        //refresh();
+
     }
 
     function rangeHandler(e) {
