@@ -9,13 +9,13 @@ export default function Create(props) {
         e.preventDefault();
         let newHistoryItem = {
             title: e.target.title.value,
-            dueDate: e.target.dueDate.value,
-            assignee: e.target.assignee.value,
+            //dueDate: e.target.dueDate.value,
             difficulty: e.target.difficulty.value,
+            assignedTo: e.target.assignee.value,
             completed: false,
         }
         let newHistory = [newHistoryItem, ...props.history];
-        //console.log(newHistoryItem);
+        console.log(newHistoryItem);
         props.addToHistory(newHistory);
     }
 
@@ -34,8 +34,8 @@ export default function Create(props) {
                         <label name="title">To Do: </label>
                         <input name="title" type="text"></input>
 
-                        <label name="dueDate">Due Date: </label>
-                        <input name="dueDate" type="date"></input>
+                        {/* <label name="dueDate">Due Date: </label>
+                        <input name="dueDate" type="date"></input> */}
 
                         <label name="assignee">Assigned To: </label>
                         <input name="assignee" type="text"></input>

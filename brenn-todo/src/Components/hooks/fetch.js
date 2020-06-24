@@ -5,7 +5,7 @@ export default function useFetch(url){
     const [data, setData] = useState(null);
   
     useEffect(() => {
-      async function doFetch() {
+      async function doFirstFetch() {
         setLoading(true);
         let response = await fetch(url);
         let json = await response.json();
@@ -14,11 +14,20 @@ export default function useFetch(url){
         //console.log(json);
       }
   
-      doFetch();
+      doFirstFetch();
       
     }, [url]);
+
+    async function refresh() {
+      setLoading(true);
+      let response = await fetch(url);
+      let json = await response.json();
+      setData(json);
+      setLoading(false);
+    }
     return [
         isLoading,
         data,
+        refresh,
       ];
 }

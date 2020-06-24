@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
-  const [isLoading, data] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
+  const [isLoading, data, refresh] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
   function setUserName(newUserName) {
@@ -23,6 +23,7 @@ function App() {
     console.log(newHistory);
      setHistory(newHistory);
      window.localStorage.setItem("history", JSON.stringify(newHistory));
+     refresh();
   }
 
 
