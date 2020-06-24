@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import useFetch from './Components/hooks/fetch';
 import Header from './Components/header';
 import Footer from './Components/footer';
 import Login from './Components/login';
@@ -9,7 +10,7 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
-  //const [history, setHistory] = useState(JSON.parse(window.localStorage.getItem("history")) || []);
+  const [isLoading, data] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
   function setUserName(newUserName) {
@@ -25,10 +26,10 @@ function App() {
 
 
   useEffect(() => {
-    let currentHistory = JSON.parse(window.localStorage.getItem("history"));
-    console.log("Intital history is: " + currentHistory);
-    setHistory(currentHistory || []);
-  }, []);
+    console.log("Intital history is: " + data);
+    setHistory(data);
+    window.localStorage.setItem("history", JSON.stringify(data));
+  }, [data]);
 
   useEffect(() => {
     document.title = user + "'s To Do list";
