@@ -9,6 +9,8 @@ export default function Todos(props) {
     const [incompletedCount, setIncompletedCount] = useState(0);
     const [indexStart, setIndexStart] = useState(0);
     const [filteredTodos, setFilteredTodos] = useState(listOfTodos);
+    const [pageCount, setPageCount] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
 
     function toggleComplete(index) {
@@ -43,13 +45,21 @@ export default function Todos(props) {
                 Icount++;
             }
         });
-        let newFiltered = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo )
-        .filter((todo, index) => index > indexStart && index <=  (indexStart + numberPerPage))
-        setFilteredTodos(newFiltered);
+        let filterByCompletion = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo );
+        let filteredByPageNumber = filterByCompletion.filter((todo, index) => index > indexStart && index <=  (indexStart + numberPerPage))
+        setFilteredTodos(filteredByPageNumber);
+        let number = Math.ceil(filterByCompletion.length / numberPerPage);
+        console.log(number);
+        setPageCount(Math.ceil(filterByCompletion.length / numberPerPage));
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
     }, [listOfTodos, indexStart, hideCompleted, numberPerPage]);
     
+
+    function pageIncrement(){
+        setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage);
+      setCurrentPage(currentPage +1);
+    }
 
     return (
         <>
@@ -76,8 +86,8 @@ export default function Todos(props) {
                 </ul>
                 <div id="pageButtons">
                     <button onClick={() => setIndexStart(indexStart ? indexStart - numberPerPage : 0)}>Previous Page</button>
-                    <button className= {indexStart > filteredTodos.length ? "hideButton" : "showButton" } 
-                    onClick={() => setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage)}>Next Page</button>
+                    <button className= {currentPage === pageCount ? "hideButton" : "showButton" } 
+                    onClick={() => pageIncrement()}>Next Page</button>
                 </div>
             </div>
         </>
