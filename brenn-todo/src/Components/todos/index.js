@@ -7,7 +7,7 @@ export default function Todos(props) {
     const [incompletedCount, setIncompletedCount] = useState(0);
     const {listOfTodos, updateStoredTodos } = props;
     const {numberPerPage, hideCompleted} = useSettings();
-    const {indexStart, setIndexStart} = useState(0)
+    const [indexStart, setIndexStart] = useState();
     const [filteredTodos, setFilteredTodos] = useState( initialFilter());
     
 
@@ -19,7 +19,6 @@ export default function Todos(props) {
         } else {
             let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
             filteredTodos = filteredTodos.filter((todo, index) => index <  numberPerPage )
-            console.log(filteredTodos);
             return filteredTodos;
         }
     }
@@ -58,6 +57,17 @@ export default function Todos(props) {
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
     }, [listOfTodos])
+    
+    // useEffect(() =>{
+    //     if(!hideCompleted) {
+    //         let filteredTodos = listOfTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
+    //          setFilteredTodos(filteredTodos);
+    //      } else {
+    //          let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
+    //          filteredTodos = filteredTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
+    //          setFilteredTodos(filteredTodos);
+    //      }
+    // }, [indexStart]);
 
     // useEffect(() => {
     //     if(!hideCompleted) {
@@ -91,6 +101,10 @@ export default function Todos(props) {
 
                     ))}
                 </ul>
+                <div id="pageButtons">
+                    <button onClick={() => setIndexStart(indexStart ? indexStart - numberPerPage : 0)}>Previous Page</button>
+                    <button onClick={() => setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage)}>Next Page</button>
+                </div>
             </div>
         </>
     )
