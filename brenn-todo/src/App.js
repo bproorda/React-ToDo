@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
-  const [isLoading, data, refresh] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
+  const [isLoading, data, refresh] = useFetch('https://deltav-todo-alpha.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
   function setUserName(newUserName) {
