@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState("Squirrel");
-  const [isLoading, data, refresh] = useFetch('https://deltav-todo.azurewebsites.net/api/v1/Todos');
+  const [isLoading, data, refresh] = useFetch('https://deltav-todo-alpha.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
   function setUserName(newUserName) {
@@ -40,7 +40,10 @@ function App() {
   if(isLoading) {
     return (
         <>
-        <img src={LoadingPic} id="loadingPic" alt="loadingPic" />
+        <div id="loadingPic">
+        <h1>Loading...</h1>
+        <img src={LoadingPic}  alt="loadingPic" />
+        </div>
         </>
     )
 } else {
