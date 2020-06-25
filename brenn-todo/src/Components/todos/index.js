@@ -60,11 +60,9 @@ export default function Todos(props) {
     useEffect(() => {
         if(!hideCompleted) {
             setFilteredTodos(listOfTodos);
-            return listOfTodos
         } else {
             let filteredTodos = listOfTodos.filter(todo => !todo.completed );
             setFilteredTodos(filteredTodos);
-            return filteredTodos;
         }
     }, [hideCompleted, listOfTodos]);
 
