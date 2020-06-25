@@ -48,7 +48,7 @@ export default function Todos(props) {
         setFilteredTodos(newFiltered);
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
-    }, [listOfTodos]);
+    }, [listOfTodos, indexStart, hideCompleted, numberPerPage]);
     
 
     return (
@@ -76,7 +76,8 @@ export default function Todos(props) {
                 </ul>
                 <div id="pageButtons">
                     <button onClick={() => setIndexStart(indexStart ? indexStart - numberPerPage : 0)}>Previous Page</button>
-                    <button onClick={() => setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage)}>Next Page</button>
+                    <button className= {indexStart > filteredTodos.length ? "hideButton" : "showButton" } 
+                    onClick={() => setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage)}>Next Page</button>
                 </div>
             </div>
         </>
