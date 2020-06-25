@@ -8,6 +8,7 @@ export default function Todos(props) {
     const [completedCount, setCompletedCount] = useState(0);
     const [incompletedCount, setIncompletedCount] = useState(0);
     const [indexStart, setIndexStart] = useState(0);
+    const [filteredTodos, setFilteredTodos] = useState(listOfTodos);
 
 
     function toggleComplete(index) {
@@ -32,6 +33,7 @@ export default function Todos(props) {
     }
 
     useEffect(() => {
+        console.log("UseEffect is running");
         let Ccount = 0;
         let Icount = 0;
         listOfTodos.forEach(todo => {
@@ -41,6 +43,9 @@ export default function Todos(props) {
                 Icount++;
             }
         });
+        let newFiltered = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo )
+        .filter((todo, index) => index > indexStart && index <=  (indexStart + numberPerPage))
+        setFilteredTodos(newFiltered);
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
     }, [listOfTodos]);
@@ -54,8 +59,7 @@ export default function Todos(props) {
                     <h2>Completed To Dos: <span id="cc">{completedCount}</span></h2>
                 </div>
                 <ul>
-                    {listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo )
-                    .filter((todo, index) => index > indexStart && index <=  (indexStart + numberPerPage)).map((todo, index) => (
+                {filteredTodos.map((todo, index) => (
                         <li key={todo.id} className={todo.completed ? "complete" : "incomplete"}>
                             <h3>To Do: {todo.title}</h3>
                             <p>Assigned to: {todo.assignedTo}</p>
