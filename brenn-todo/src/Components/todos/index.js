@@ -8,22 +8,7 @@ export default function Todos(props) {
     const [completedCount, setCompletedCount] = useState(0);
     const [incompletedCount, setIncompletedCount] = useState(0);
     const [indexStart, setIndexStart] = useState(0);
-    const [filteredTodos, setFilteredTodos] = useState( initialFilter());
-    
 
-
-    function initialFilter(){
-        console.log(indexStart);
-        //setIndexStart(0);
-        if(!hideCompleted) {
-           let filteredTodos = listOfTodos.filter((todo, index) => index <  numberPerPage )
-            return filteredTodos
-        } else {
-            let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
-            filteredTodos = filteredTodos.filter((todo, index) => index <  numberPerPage )
-            return filteredTodos;
-        }
-    }
 
     function toggleComplete(index) {
         let updatedTodos = listOfTodos.map((todo, id) => {
@@ -58,21 +43,8 @@ export default function Todos(props) {
         });
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
-    }, [listOfTodos])
+    }, [listOfTodos]);
     
-    useEffect(() =>{
-        if(!hideCompleted) {
-            let filteredTodos = listOfTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
-             setFilteredTodos(filteredTodos);
-         } else {
-             let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
-             filteredTodos = filteredTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
-             setFilteredTodos(filteredTodos);
-         }
-         console.log(filteredTodos);
-    }, [indexStart]);
-
-
 
     return (
         <>
@@ -82,7 +54,8 @@ export default function Todos(props) {
                     <h2>Completed To Dos: <span id="cc">{completedCount}</span></h2>
                 </div>
                 <ul>
-                    {filteredTodos.map((todo, index) => (
+                    {listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo )
+                    .filter((todo, index) => index > indexStart && index <=  (indexStart + numberPerPage)).map((todo, index) => (
                         <li key={todo.id} className={todo.completed ? "complete" : "incomplete"}>
                             <h3>To Do: {todo.title}</h3>
                             <p>Assigned to: {todo.assignedTo}</p>
