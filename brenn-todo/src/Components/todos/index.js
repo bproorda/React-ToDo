@@ -45,7 +45,7 @@ export default function Todos(props) {
                 Icount++;
             }
         });
-        let filterByCompletion = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo );
+        let filterByCompletion = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : true );
         let filteredByPageNumber = filterByCompletion
         .filter((todo, index) => (index >= indexStart && index <  indexStart + numberPerPage));
         setFilteredTodos(filteredByPageNumber);
