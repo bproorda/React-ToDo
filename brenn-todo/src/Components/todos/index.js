@@ -60,6 +60,10 @@ export default function Todos(props) {
         setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage);
       setCurrentPage(currentPage +1);
     }
+    function pageDecrement(){
+        setIndexStart(indexStart ? indexStart - numberPerPage : 0);
+        setCurrentPage(currentPage - 1);
+    }
 
     return (
         <>
@@ -85,7 +89,7 @@ export default function Todos(props) {
                     ))}
                 </ul>
                 <div id="pageButtons">
-                    <button onClick={() => setIndexStart(indexStart ? indexStart - numberPerPage : 0)}>Previous Page</button>
+                    <button onClick={() => pageDecrement()}>Previous Page</button>
                     <button className= {currentPage === pageCount ? "hideButton" : "showButton" } 
                     onClick={() => pageIncrement()}>Next Page</button>
                 </div>
