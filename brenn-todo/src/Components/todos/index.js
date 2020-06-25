@@ -7,17 +7,19 @@ export default function Todos(props) {
     const [incompletedCount, setIncompletedCount] = useState(0);
     const {listOfTodos, updateStoredTodos } = props;
     const {numberPerPage, hideCompleted} = useSettings();
+    const {indexStart, setIndexStart} = useState(0)
     const [filteredTodos, setFilteredTodos] = useState( initialFilter());
     
 
 
     function initialFilter(){
         if(!hideCompleted) {
-            //setFilteredTodos(listOfTodos);
-            return listOfTodos
+           let filteredTodos = listOfTodos.filter((todo, index) => index <  numberPerPage )
+            return filteredTodos
         } else {
-            let filteredTodos = listOfTodos.filter(todo => !todo.completed );
-            //setFilteredTodos(filteredTodos);
+            let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
+            filteredTodos = filteredTodos.filter((todo, index) => index <  numberPerPage )
+            console.log(filteredTodos);
             return filteredTodos;
         }
     }
@@ -57,14 +59,14 @@ export default function Todos(props) {
         setIncompletedCount(Icount);
     }, [listOfTodos])
 
-    useEffect(() => {
-        if(!hideCompleted) {
-            setFilteredTodos(listOfTodos);
-        } else {
-            let filteredTodos = listOfTodos.filter(todo => !todo.completed );
-            setFilteredTodos(filteredTodos);
-        }
-    }, [hideCompleted, listOfTodos]);
+    // useEffect(() => {
+    //     if(!hideCompleted) {
+    //         setFilteredTodos(listOfTodos);
+    //     } else {
+    //         let filteredTodos = listOfTodos.filter(todo => !todo.completed );
+    //         setFilteredTodos(filteredTodos);
+    //     }
+    // }, [hideCompleted, listOfTodos]);
 
     return (
         <>
