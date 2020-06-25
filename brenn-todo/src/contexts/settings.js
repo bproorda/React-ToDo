@@ -8,7 +8,7 @@ export class SettingsProvider extends React.Component{
 
         this.state = {
             numberPerPage: 5,
-            hideCompleted: true,
+            hideCompleted: false,
         }
     }
 

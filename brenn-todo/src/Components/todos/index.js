@@ -3,16 +3,18 @@ import './todos.scss';
 import useSettings from '../../contexts/settings';
 
 export default function Todos(props) {
-    const [completedCount, setCompletedCount] = useState(0);
-    const [incompletedCount, setIncompletedCount] = useState(0);
     const {listOfTodos, updateStoredTodos } = props;
     const {numberPerPage, hideCompleted} = useSettings();
-    const [indexStart, setIndexStart] = useState();
+    const [completedCount, setCompletedCount] = useState(0);
+    const [incompletedCount, setIncompletedCount] = useState(0);
+    const [indexStart, setIndexStart] = useState(0);
     const [filteredTodos, setFilteredTodos] = useState( initialFilter());
     
 
 
     function initialFilter(){
+        console.log(indexStart);
+        //setIndexStart(0);
         if(!hideCompleted) {
            let filteredTodos = listOfTodos.filter((todo, index) => index <  numberPerPage )
             return filteredTodos
@@ -58,25 +60,19 @@ export default function Todos(props) {
         setIncompletedCount(Icount);
     }, [listOfTodos])
     
-    // useEffect(() =>{
-    //     if(!hideCompleted) {
-    //         let filteredTodos = listOfTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
-    //          setFilteredTodos(filteredTodos);
-    //      } else {
-    //          let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
-    //          filteredTodos = filteredTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
-    //          setFilteredTodos(filteredTodos);
-    //      }
-    // }, [indexStart]);
+    useEffect(() =>{
+        if(!hideCompleted) {
+            let filteredTodos = listOfTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
+             setFilteredTodos(filteredTodos);
+         } else {
+             let filteredTodos = listOfTodos.filter((todo) => !todo.completed);
+             filteredTodos = filteredTodos.filter((todo, index) => index > indexStart && index <  (indexStart + numberPerPage) )
+             setFilteredTodos(filteredTodos);
+         }
+         console.log(filteredTodos);
+    }, [indexStart]);
 
-    // useEffect(() => {
-    //     if(!hideCompleted) {
-    //         setFilteredTodos(listOfTodos);
-    //     } else {
-    //         let filteredTodos = listOfTodos.filter(todo => !todo.completed );
-    //         setFilteredTodos(filteredTodos);
-    //     }
-    // }, [hideCompleted, listOfTodos]);
+
 
     return (
         <>
