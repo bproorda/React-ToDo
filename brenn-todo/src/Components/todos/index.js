@@ -89,10 +89,9 @@ export default function Todos(props) {
                     ))}
                 </ul>
                 <div id="pageButtons">
-                    <button className= {currentPage === 1 ? "hideButton" : "showButton" }
-                    onClick={pageDecrement}>Previous Page</button>
-                    <button className= {currentPage === pageCount ? "hideButton" : "showButton" } 
-                    onClick={pageIncrement}>Next Page</button>
+                   
+                   { pageCount !== 1 ?  <button onClick={pageDecrement}>Previous Page</button> : null}
+                   {currentPage !== pageCount ? <button onClick={pageIncrement}>Next Page</button> : null}
                 </div>
             </div>
         </>
