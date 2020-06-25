@@ -46,10 +46,13 @@ export default function Todos(props) {
             }
         });
         let filterByCompletion = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : todo );
-        let filteredByPageNumber = filterByCompletion.filter((todo, index) => index > indexStart && index <=  (indexStart + numberPerPage))
+        let filteredByPageNumber = filterByCompletion
+        .filter((todo, index) => (index >= indexStart && index <  indexStart + numberPerPage));
+        // .filter((todo, index) => ((numberPerPage - indexStart !== 1) ? (index >= indexStart && index <  (indexStart + numberPerPage)) : index === (indexStart + 1) ));
         setFilteredTodos(filteredByPageNumber);
         let number = Math.ceil(filterByCompletion.length / numberPerPage);
-        console.log(number);
+        console.log(indexStart);
+        console.log(filterByCompletion);
         setPageCount(Math.ceil(filterByCompletion.length / numberPerPage));
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
