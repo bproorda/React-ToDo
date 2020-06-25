@@ -40,7 +40,10 @@ function App() {
   if(isLoading) {
     return (
         <>
-        <img src={LoadingPic} id="loadingPic" alt="loadingPic" />
+        <div id="loadingPic">
+        <h1>Loading...</h1>
+        <img src={LoadingPic}  alt="loadingPic" />
+        </div>
         </>
     )
 } else {
