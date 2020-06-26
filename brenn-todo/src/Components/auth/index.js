@@ -7,7 +7,7 @@ export default function Auth(props) {
 
     if (!user) {
         if (not)
-            return this.props.children;
+            return props.children;
 
         return null;
     }
