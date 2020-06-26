@@ -6,11 +6,13 @@ import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
+import useAuth from './contexts/auth';
 import LoadingPic from './sq2.gif'
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState("Squirrel");
+  const [displayedUser, setUser] = useState("Squirrel");
+  const {user} = useAuth();
   const [isLoading, data, refresh] = useFetch('https://deltav-todo-alpha.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
@@ -33,8 +35,8 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    document.title = user + "'s To Do list";
-  }, [user]);
+    document.title = displayedUser + "'s To Do list";
+  }, [displayedUser]);
 
 
   if(isLoading) {
@@ -49,7 +51,7 @@ function App() {
 } else {
   return (
     <>
-      <Header userName={user} />
+      <Header userName={displayedUser} />
       <Switch>
         <Route exact path='/'>
           <Login setUserName={setUserName} />
