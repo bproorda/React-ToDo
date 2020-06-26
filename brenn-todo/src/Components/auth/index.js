@@ -25,5 +25,5 @@ export default function Auth(props) {
     if (not)
         return null;
 
-    return this.props.children;
+    return props.children;
 }

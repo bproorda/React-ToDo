@@ -6,7 +6,7 @@ import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
-//import Auth from './Components/auth';
+import Auth from './Components/auth';
 import useAuth from './contexts/auth'
 import LoadingPic from './sq2.gif'
 import './App.css';
@@ -61,7 +61,12 @@ function App() {
 
         <Route path='/todos'>
           <Todos listOfTodos={history} updateStoredTodos={updateStoredTodos}  />
+          <Auth>
           <Create updateStoredTodos={updateStoredTodos} />
+          </Auth>
+          <Auth not>
+            <h3>Please log in</h3>
+          </Auth>
         </Route>
         <Route>
           404
