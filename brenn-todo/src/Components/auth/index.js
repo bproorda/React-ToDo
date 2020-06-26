@@ -15,10 +15,10 @@ export default function Auth(props) {
     // TODO: maybe add a `can` function in context to decide?
     if (permission) {
         if (permissions.includes(permission)) {
-            return not ? null : this.props.children;
+            return not ? null : props.children;
         }
         else {
-            return not ? this.props.children : null;
+            return not ? props.children : null;
         }
     }
 
