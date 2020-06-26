@@ -32,7 +32,6 @@ export class AuthProvider extends React.Component {
       },
       body: JSON.stringify({ username, password }),
     });
-    console.log(result);
     const body = await result.json();
 
     if (result.ok){

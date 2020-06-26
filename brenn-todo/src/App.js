@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect  } from 'react-router-dom';
 import useFetch from './Components/hooks/fetch';
 import Header from './Components/header';
 import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
-import useAuth from './contexts/auth';
+//import Auth from './Components/auth';
+import useAuth from './contexts/auth'
 import LoadingPic from './sq2.gif'
 import './App.css';
 
@@ -53,9 +54,11 @@ function App() {
     <>
       <Header userName={displayedUser} />
       <Switch>
+        
         <Route exact path='/'>
-          <Login setUserName={setUserName} />
+        {!user ? <Login setUserName={setUserName}/> : <Redirect to="/todos"/>}
         </Route>
+
         <Route path='/todos'>
           <Todos listOfTodos={history} updateStoredTodos={updateStoredTodos}  />
           <Create updateStoredTodos={updateStoredTodos} />
