@@ -5,13 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter} from "react-router-dom";
 import { SettingsProvider } from './contexts/settings';
+import { AuthProvider } from './contexts/auth.js';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <AuthProvider>
     <SettingsProvider>
     <App />
     </SettingsProvider>
+    </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
