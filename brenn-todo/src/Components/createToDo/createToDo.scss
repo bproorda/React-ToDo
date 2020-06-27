@@ -1,4 +1,4 @@
-#create {
+.create {
     display: inline-block;
     position: absolute;
     background-color: darkgrey;
@@ -7,5 +7,10 @@
     width: 40%;
     input {
         display: block;
+    }
+    img {
+        text-align: center;
+        margin: auto 0;
+        width: 80%;
     }
 }

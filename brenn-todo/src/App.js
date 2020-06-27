@@ -6,6 +6,7 @@ import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
+import CantCreate from './Components/createToDo/cantCreate'
 import Auth from './Components/auth';
 import useAuth from './contexts/auth'
 import LoadingPic from './sq2.gif'
@@ -65,7 +66,7 @@ function App() {
           <Create updateStoredTodos={updateStoredTodos} />
           </Auth>
           <Auth not>
-            <h3>Please log in</h3>
+         < CantCreate/>
           </Auth>
         </Route>
         <Route>
