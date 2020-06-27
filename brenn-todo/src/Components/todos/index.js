@@ -4,8 +4,8 @@ import './todos.scss';
 import useSettings from '../../contexts/settings';
 
 export default function Todos(props) {
-    const {listOfTodos, updateStoredTodos } = props;
-    const {numberPerPage, hideCompleted} = useSettings();
+    const { listOfTodos, updateStoredTodos } = props;
+    const { numberPerPage, hideCompleted } = useSettings();
     const [completedCount, setCompletedCount] = useState(0);
     const [incompletedCount, setIncompletedCount] = useState(0);
     const [indexStart, setIndexStart] = useState(0);
@@ -30,7 +30,7 @@ export default function Todos(props) {
 
     async function deleteHandler(index) {
         let url = 'https://deltav-todo.azurewebsites.net/api/v1/Todos/' + index;
-        let response = await fetch(url, {method: "delete"});
+        let response = await fetch(url, { method: "delete" });
         console.log(response);
         updateStoredTodos();
     }
@@ -46,9 +46,9 @@ export default function Todos(props) {
                 Icount++;
             }
         });
-        let filterByCompletion = listOfTodos.filter((todo)=> hideCompleted ? todo.completed !== true : true );
+        let filterByCompletion = listOfTodos.filter((todo) => hideCompleted ? todo.completed !== true : true);
         let filteredByPageNumber = filterByCompletion
-        .slice(indexStart, (indexStart + numberPerPage));
+            .slice(indexStart, (indexStart + numberPerPage));
         setFilteredTodos(filteredByPageNumber);
         //console.log(filterByCompletion);
         //console.log(filteredByPageNumber);
@@ -56,13 +56,13 @@ export default function Todos(props) {
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
     }, [listOfTodos, indexStart, hideCompleted, numberPerPage]);
-    
 
-    function pageIncrement(){
+
+    function pageIncrement() {
         setIndexStart(indexStart ? indexStart + numberPerPage : numberPerPage);
-      setCurrentPage(currentPage +1);
+        setCurrentPage(currentPage + 1);
     }
-    function pageDecrement(){
+    function pageDecrement() {
         setIndexStart(indexStart ? indexStart - numberPerPage : 0);
         setCurrentPage(currentPage - 1);
     }
@@ -75,17 +75,21 @@ export default function Todos(props) {
                     <h2>Completed To Dos: <span id="cc">{completedCount}</span></h2>
                 </div>
                 <ul>
-                {filteredTodos.map((todo, index) => (
+                    {filteredTodos.map((todo, index) => (
                         <li key={todo.id} className={todo.completed ? "complete" : "incomplete"}>
                             <h3>To Do: {todo.title}</h3>
                             <p>Assigned to: {todo.assignedTo}</p>
                             {/* <p>Due Date: {todo.dueDate}</p> */}
                             <p>Difficulty: {todo.difficulty}</p>
                             <div className="buttons">
-                                <button onClick={() => toggleComplete(index)}>Mark Complete</button>
+                                <Auth permission='delete'>
+                                    <button onClick={() => toggleComplete(index)}>Mark Complete</button>
+                                </Auth>
+                                <Auth permission='update'>
                                 <button>Edit</button>
-                                <Auth  permission='delete'>
-                                <button onClick={() => deleteHandler(todo.id)}>Delete</button>
+                                </Auth>
+                                <Auth permission='delete'>
+                                    <button onClick={() => deleteHandler(todo.id)}>Delete</button>
                                 </Auth>
                             </div>
                         </li>
@@ -93,9 +97,9 @@ export default function Todos(props) {
                     ))}
                 </ul>
                 <div id="pageButtons">
-                   
-                   { pageCount !== 1 ?  <button onClick={pageDecrement}>Previous Page</button> : null}
-                   {currentPage !== pageCount ? <button onClick={pageIncrement}>Next Page</button> : null}
+
+                    {pageCount !== 1 ? <button onClick={pageDecrement}>Previous Page</button> : null}
+                    {currentPage !== pageCount ? <button onClick={pageIncrement}>Next Page</button> : null}
                 </div>
             </div>
         </>
