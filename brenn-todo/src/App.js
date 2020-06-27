@@ -62,7 +62,7 @@ function App() {
 
         <Route path='/todos'>
           <Todos listOfTodos={history} updateStoredTodos={updateStoredTodos}  />
-          <Auth>
+          <Auth permission='create'>
           <Create updateStoredTodos={updateStoredTodos} />
           </Auth>
           <Auth not>

@@ -36,7 +36,7 @@ export default function Todos(props) {
     }
 
     useEffect(() => {
-        console.log("UseEffect is running");
+        //console.log("UseEffect is running");
         let Ccount = 0;
         let Icount = 0;
         listOfTodos.forEach(todo => {
@@ -50,8 +50,8 @@ export default function Todos(props) {
         let filteredByPageNumber = filterByCompletion
         .slice(indexStart, (indexStart + numberPerPage));
         setFilteredTodos(filteredByPageNumber);
-        console.log(filterByCompletion);
-        console.log(filteredByPageNumber);
+        //console.log(filterByCompletion);
+        //console.log(filteredByPageNumber);
         setPageCount(Math.ceil(filterByCompletion.length / numberPerPage));
         setCompletedCount(Ccount);
         setIncompletedCount(Icount);
