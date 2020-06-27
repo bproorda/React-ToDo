@@ -17,13 +17,14 @@ export class AuthProvider extends React.Component {
     this.state = {
       user: null,
       permissions: [],
+      goodLogin: true,
 
       // Functions!
       login: this.login,
       logout: this.logout,
     };
   }
-
+ 
   login = async (username, password) => {
     const result = await fetch(`${usersAPI}/Login`, {
       method: 'post',
@@ -35,14 +36,17 @@ export class AuthProvider extends React.Component {
     const body = await result.json();
     if (result.ok){
       if (this.processToken(body.token, body)){
-        return;
+        this.setState({goodLogin: true});
+        return result.ok;
       }
     }
+    this.setState({goodLogin: false});
     this.logout();
+    return result.ok;
   }
 
   logout = () => {
-    this.setState({ user: null, permissions: [] });
+    this.setState({ user: null, permissions: [], goodLogin: true });
     cookie.remove('auth');
   }
 
