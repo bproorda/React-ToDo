@@ -17,7 +17,6 @@ export class AuthProvider extends React.Component {
     this.state = {
       user: null,
       permissions: [],
-      goodLogin: true,
 
       // Functions!
       login: this.login,
@@ -36,17 +35,15 @@ export class AuthProvider extends React.Component {
     const body = await result.json();
     if (result.ok){
       if (this.processToken(body.token, body)){
-        this.setState({goodLogin: true});
         return result.ok;
       }
     }
-    this.setState({goodLogin: false});
     this.logout();
     return result.ok;
   }
 
   logout = () => {
-    this.setState({ user: null, permissions: [], goodLogin: true });
+    this.setState({ user: null, permissions: [] });
     cookie.remove('auth');
   }
 
