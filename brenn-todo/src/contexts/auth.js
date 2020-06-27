@@ -33,7 +33,7 @@ export class AuthProvider extends React.Component {
       body: JSON.stringify({ username, password }),
     });
     const body = await result.json();
-
+    console.log(body.token);
     if (result.ok){
       if (this.processToken(body.token, body)){
         return;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Auth from '../auth/';
 import './todos.scss';
 import useSettings from '../../contexts/settings';
 
@@ -83,7 +84,9 @@ export default function Todos(props) {
                             <div className="buttons">
                                 <button onClick={() => toggleComplete(index)}>Mark Complete</button>
                                 <button>Edit</button>
+                                <Auth  permission='delete'>
                                 <button onClick={() => deleteHandler(todo.id)}>Delete</button>
+                                </Auth>
                             </div>
                         </li>
 

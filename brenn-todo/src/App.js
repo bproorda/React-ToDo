@@ -13,8 +13,8 @@ import LoadingPic from './sq2.gif'
 import './App.css';
 
 function App() {
-  const [displayedUser, setUser] = useState("Squirrel");
   const {user} = useAuth();
+  const [displayedUser, setUser] = useState(user || "Squirrel");
   const [isLoading, data, refresh] = useFetch('https://deltav-todo-alpha.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
