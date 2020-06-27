@@ -7,6 +7,7 @@ export default function Login(props) {
 
     const {login} = useAuth();
     const [name, setName] = useState("");
+    const [loginFailed, setLoginFailed] = useState(true);
 
     let history = useHistory();
 
@@ -19,6 +20,8 @@ export default function Login(props) {
         if(resultOk) {
             history.push('/todos');
             props.setUserName(name);
+        } else {
+            setLoginFailed(resultOk);
         };
     }
 
@@ -33,7 +36,7 @@ export default function Login(props) {
                 <h3>Please login</h3>
                 <label className="loginInput">Enter your UserName: <input name="username" onChange={(e) => setName(e.target.value)} required /></label>
                 <label className="loginInput">Enter your Password: <input type="password" name = "password" required /></label>
-                {/* {goodLogin ? null : <h3>Login Failed</h3> } */}
+                {loginFailed ? null : <h3 id='loginFailed'>Login Failed</h3> }
                 <button type='submit'>Log in</button>
                 <button disabled type='button'>Register</button>
                 <button type="button" onClick={skipHandler}>Skip</button>
