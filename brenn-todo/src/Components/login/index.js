@@ -46,8 +46,8 @@ export default function Login(props) {
                 <button type='submit'>Log in</button>
                 <button onClick={showRegister} type='button'>Register</button>
                 <button type="button" onClick={skipHandler}>Skip</button>
-                {toggle ? <RegisterModal showRegister={showRegister}/> : null}
             </form>
+            {toggle ? <RegisterModal showRegister={showRegister}/> : null}
         </>
     )
 }
