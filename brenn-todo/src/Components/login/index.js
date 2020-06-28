@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useAuth from '../../contexts/auth';
+import RegisterModal from './registerModal.js';
 import './login.scss'
 
 export default function Login(props) {
@@ -45,7 +46,7 @@ export default function Login(props) {
                 <button type='submit'>Log in</button>
                 <button onClick={showRegister} type='button'>Register</button>
                 <button type="button" onClick={skipHandler}>Skip</button>
-                {toggle ? <h3>Place Modal Here</h3> : null}
+                {toggle ? <RegisterModal showRegister={showRegister}/> : null}
             </form>
         </>
     )
