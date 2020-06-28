@@ -7,6 +7,7 @@ export default function Login(props) {
 
     const {login} = useAuth();
     const [name, setName] = useState("");
+    const [toggle, setToggle] = useState(false);
     const [loginFailed, setLoginFailed] = useState(true);
 
     let history = useHistory();
@@ -29,6 +30,10 @@ export default function Login(props) {
         history.push('/todos');
     }
 
+    function showRegister(){
+        setToggle(!toggle);
+    }
+
     return (
         <>
 
@@ -38,8 +43,9 @@ export default function Login(props) {
                 <label className="loginInput">Enter your Password: <input type="password" name = "password" required /></label>
                 {loginFailed ? null : <h3 id='loginFailed'>Login Failed</h3> }
                 <button type='submit'>Log in</button>
-                <button disabled type='button'>Register</button>
+                <button onClick={showRegister} type='button'>Register</button>
                 <button type="button" onClick={skipHandler}>Skip</button>
+                {toggle ? <h3>Place Modal Here</h3> : null}
             </form>
         </>
     )
