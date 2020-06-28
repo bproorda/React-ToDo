@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './login.scss'
 
 export default function RegisterModal(props){
 
+    let url = 'https://deltav-todo.azurewebsites.net/api/v1/Users/Register'
 
-
-function registerHandler(e){
+async function registerHandler(e){
     e.preventDefault();
-console.log(e.target.roles.value);
+    let form = e.target;
+    let newUser ={
+        email: form.email.value,
+        roles: form.roles.value.split(", "),
+        username: form.username.value,
+        password: form.password.value,
+    }
+    let response = await fetch(url, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newUser),
+    }); 
+    console.log(response);
+    form.reset();
+    props.showRegister();
+
+
 }
 
     return (
