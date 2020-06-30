@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect  } from 'react-router-dom';
 import useFetch from './Components/hooks/fetch';
 import Header from './Components/header';
 import Footer from './Components/footer';
 import Login from './Components/login';
 import Todos from './Components/todos';
 import Create from './Components/createToDo';
+import CantCreate from './Components/createToDo/cantCreate'
+import Auth from './Components/auth';
+import useAuth from './contexts/auth'
 import LoadingPic from './sq2.gif'
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState("Squirrel");
+  const {user} = useAuth();
+  const [displayedUser, setUser] = useState(user || "Squirrel");
   const [isLoading, data, refresh] = useFetch('https://deltav-todo-alpha.azurewebsites.net/api/v1/Todos');
   const [history, setHistory] = useState([]);
 
@@ -33,8 +37,8 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    document.title = user + "'s To Do list";
-  }, [user]);
+    document.title = displayedUser + "'s To Do list";
+  }, [displayedUser]);
 
 
   if(isLoading) {
@@ -49,14 +53,21 @@ function App() {
 } else {
   return (
     <>
-      <Header userName={user} />
+      <Header userName={displayedUser} />
       <Switch>
+        
         <Route exact path='/'>
-          <Login setUserName={setUserName} />
+        {!user ? <Login setUserName={setUserName}/> : <Redirect to="/todos"/>}
         </Route>
+
         <Route path='/todos'>
           <Todos listOfTodos={history} updateStoredTodos={updateStoredTodos}  />
+          <Auth permission='create'>
           <Create updateStoredTodos={updateStoredTodos} />
+          </Auth>
+          <Auth not>
+         < CantCreate/>
+          </Auth>
         </Route>
         <Route>
           404

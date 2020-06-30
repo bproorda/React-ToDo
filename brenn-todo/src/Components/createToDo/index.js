@@ -35,7 +35,7 @@ export default function Create(props) {
 
     return (
         <>
-            <div id="create">
+            <div className="create">
                 <form onSubmit={SubmitHandler}>
                     <fieldset>
                         <legend>Create New To Do</legend>

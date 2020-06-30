@@ -16,4 +16,12 @@ header {
         //figure out how to vertically center text later
         margin: auto 0 auto 0;
     }
+
+    #headerBtn {
+        width: 5%;
+        display: inline-block;
+        position: absolute;
+        top: 30%;
+        right: 5%;
+    }
 }
